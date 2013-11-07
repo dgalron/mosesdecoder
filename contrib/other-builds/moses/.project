@@ -687,6 +687,11 @@
 			<locationURI>PARENT-3-PROJECT_LOC/moses/ScoreComponentCollectionTest.cpp</locationURI>
 		</link>
 		<link>
+			<name>Search</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>Search.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-3-PROJECT_LOC/moses/Search.cpp</locationURI>
@@ -1537,6 +1542,11 @@
 			<locationURI>PARENT-3-PROJECT_LOC/moses/LM/backward.arpa</locationURI>
 		</link>
 		<link>
+			<name>Search/SCFG</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>TranslationModel/BilingualDynSuffixArray.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-3-PROJECT_LOC/moses/TranslationModel/BilingualDynSuffixArray.cpp</locationURI>
@@ -1755,6 +1765,46 @@
 			<name>FF/OSM-Feature/osmHyp.h</name>
 			<type>1</type>
 			<locationURI>PARENT-3-PROJECT_LOC/moses/FF/OSM-Feature/osmHyp.h</locationURI>
+		</link>
+		<link>
+			<name>Search/SCFG/HHChartCell.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/moses/Search/SCFG/HHChartCell.cpp</locationURI>
+		</link>
+		<link>
+			<name>Search/SCFG/HHChartCell.h</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/moses/Search/SCFG/HHChartCell.h</locationURI>
+		</link>
+		<link>
+			<name>Search/SCFG/HHChartCells.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/moses/Search/SCFG/HHChartCells.cpp</locationURI>
+		</link>
+		<link>
+			<name>Search/SCFG/HHChartCells.h</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/moses/Search/SCFG/HHChartCells.h</locationURI>
+		</link>
+		<link>
+			<name>Search/SCFG/HHInputPathSCFG.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/moses/Search/SCFG/HHInputPathSCFG.cpp</locationURI>
+		</link>
+		<link>
+			<name>Search/SCFG/HHInputPathSCFG.h</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/moses/Search/SCFG/HHInputPathSCFG.h</locationURI>
+		</link>
+		<link>
+			<name>Search/SCFG/HHManager.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/moses/Search/SCFG/HHManager.cpp</locationURI>
+		</link>
+		<link>
+			<name>Search/SCFG/HHManager.h</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/moses/Search/SCFG/HHManager.h</locationURI>
 		</link>
 		<link>
 			<name>TranslationModel/CYKPlusParser/ChartRuleLookupManagerCYKPlus.cpp</name>
