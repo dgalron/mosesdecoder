@@ -52,6 +52,7 @@ class WordsRange;
 class ChartCellCollectionBase;
 class ChartRuleLookupManager;
 class ChartParser;
+class HHLookupManager;
 
 /**
   * Abstract base class for phrase dictionaries (tables).
@@ -93,6 +94,10 @@ public:
   virtual ChartRuleLookupManager *CreateRuleLookupManager(
     const ChartParser &,
     const ChartCellCollectionBase &) = 0;
+
+  virtual HHLookupManager *HHCreateLookupManager()
+  { return NULL; // error
+  }
 
   const std::string &GetFilePath() const {
     return m_filePath;
