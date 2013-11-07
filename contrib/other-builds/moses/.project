@@ -1797,6 +1797,16 @@
 			<locationURI>PARENT-3-PROJECT_LOC/moses/Search/SCFG/HHInputPathSCFG.h</locationURI>
 		</link>
 		<link>
+			<name>Search/SCFG/HHLookupManager.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/moses/Search/SCFG/HHLookupManager.cpp</locationURI>
+		</link>
+		<link>
+			<name>Search/SCFG/HHLookupManager.h</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/moses/Search/SCFG/HHLookupManager.h</locationURI>
+		</link>
+		<link>
 			<name>Search/SCFG/HHManager.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-3-PROJECT_LOC/moses/Search/SCFG/HHManager.cpp</locationURI>

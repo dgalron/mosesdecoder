@@ -11,17 +11,18 @@ class HHLookupManager;
 
 class HHManager
 {
-  //typedef std::vector<HHInputPathSCFG*> InputPathListSCFG;
+  typedef std::vector<HHInputPathSCFG*> InputPathListSCFG;
 public:
 	HHManager(InputType const& source);
 	virtual ~HHManager();
 
+  void Process();
 
 protected:
 	  const InputType &m_source;
 	  HHChartCells m_cells;
 
-	  std::vector<HHInputPathSCFG*> m_inputPathQueue;
+	  InputPathListSCFG m_inputPathQueue;
 	  std::vector<HHLookupManager*> m_ruleLookupManagers;
 
 	  typedef std::vector< std::vector<HHInputPathSCFG*> > InputPathMatrix;

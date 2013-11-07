@@ -35,6 +35,7 @@
 #include "moses/TranslationModel/RuleTable/Loader.h"
 #include "moses/TranslationModel/CYKPlusParser/ChartRuleLookupManagerMemory.h"
 #include "moses/InputPath.h"
+#include "moses/Search/SCFG/HHLookupManager.h"
 
 using namespace std;
 
@@ -124,6 +125,11 @@ ChartRuleLookupManager *PhraseDictionaryMemory::CreateRuleLookupManager(
   const ChartCellCollectionBase &cellCollection)
 {
   return new ChartRuleLookupManagerMemory(parser, cellCollection, *this);
+}
+
+HHLookupManager *PhraseDictionaryMemory::HHCreateLookupManager()
+{
+  return new HHLookupManager();
 }
 
 void PhraseDictionaryMemory::SortAndPrune()

@@ -1,5 +1,6 @@
 #include "HHManager.h"
 #include "HHInputPathSCFG.h"
+#include "HHLookupManager.h"
 #include "moses/InputType.h"
 #include "moses/Util.h"
 #include "moses/StaticData.h"
@@ -75,8 +76,26 @@ void HHManager::InitializeLookupManagers()
     PhraseDictionary *nonConstDict = const_cast<PhraseDictionary*>(dict);
 
     HHLookupManager *lookupMgr = nonConstDict->HHCreateLookupManager();
-
     m_ruleLookupManagers.push_back(lookupMgr);
+  }
+
+}
+
+void HHManager::Process()
+{
+  InputPathListSCFG::iterator iterPath;
+  for (iterPath = m_inputPathQueue.begin(); iterPath != m_inputPathQueue.end(); ++iterPath) {
+    HHInputPathSCFG &path = **iterPath;
+
+    // parse
+    std::vector<HHLookupManager*>::iterator iterLookupMgr;
+    for (iterLookupMgr = m_ruleLookupManagers.begin(); iterLookupMgr != m_ruleLookupManagers.end(); ++iterLookupMgr) {
+      HHLookupManager &lookupMgr = **iterLookupMgr;
+      lookupMgr.Lookup(path);
+    }
+
+    // decode
+
   }
 
 }
