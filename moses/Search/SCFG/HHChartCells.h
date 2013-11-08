@@ -5,6 +5,7 @@
 
 namespace Moses
 {
+class WordsRange;
 
 class HHChartCells
 {
@@ -14,6 +15,7 @@ public:
 	HHChartCells(std::size_t size);
 	virtual ~HHChartCells();
 
+	const HHChartCell &GetCell(const WordsRange &range) const;
 
 protected:
 	std::size_t m_size;

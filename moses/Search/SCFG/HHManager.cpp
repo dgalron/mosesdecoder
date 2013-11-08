@@ -94,7 +94,7 @@ void HHManager::Process()
     std::vector<HHLookupManager*>::iterator iterLookupMgr;
     for (iterLookupMgr = m_ruleLookupManagers.begin(); iterLookupMgr != m_ruleLookupManagers.end(); ++iterLookupMgr) {
       HHLookupManager &lookupMgr = **iterLookupMgr;
-      lookupMgr.Lookup(path);
+      lookupMgr.Lookup(path,m_cells);
     }
 
     // decode

@@ -4,11 +4,12 @@
 namespace Moses
 {
 class HHInputPathSCFG;
+class HHChartCells;
 
 class HHLookupManager
 {
 public:
-  virtual void Lookup(HHInputPathSCFG &path) = 0;
+  virtual void Lookup(HHInputPathSCFG &path, const HHChartCells &cells) = 0;
 };
 
 //////////////////////////////////////////////////////////////
@@ -33,7 +34,10 @@ class HHLookupManagerMemory : public HHLookupManager
   };
 
 public:
-  void Lookup(HHInputPathSCFG &path);
+  HHLookupManagerMemory(); // do not implement
+  HHLookupManagerMemory(const PhraseDictionaryMemory &pt, std::size_t size);
+
+  void Lookup(HHInputPathSCFG &path, const HHChartCells &cells);
 
 protected:
   const PhraseDictionaryMemory &m_pt;
@@ -42,9 +46,8 @@ protected:
   typedef std::vector<ActiveChartList> ActiveChart;
   ActiveChart m_activeItems;
 
-public:
-  HHLookupManagerMemory(); // do not implement
-  HHLookupManagerMemory(const PhraseDictionaryMemory &pt, std::size_t size);
+  void LookupNonTerm(HHInputPathSCFG &path);
+
 
 };
 

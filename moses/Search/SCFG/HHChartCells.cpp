@@ -1,4 +1,5 @@
 #include "HHChartCells.h"
+#include "moses/WordsRange.h"
 
 using namespace std;
 
@@ -23,5 +24,9 @@ HHChartCells::~HHChartCells()
 
 }
 
+const HHChartCell &HHChartCells::GetCell(const WordsRange &range) const
+{
+  return *m_cells[range.GetStartPos()][range.GetEndPos() - range.GetStartPos()];
+}
 
 } // namespace
