@@ -55,7 +55,7 @@ public:
     const ChartParser &,
     const ChartCellCollectionBase &);
 
-  virtual HHLookupManager *HHCreateLookupManager();
+  virtual HHLookupManager *HHCreateLookupManager(size_t size);
 
   // only used by multi-model phrase table, and other meta-features
   const TargetPhraseCollection *GetTargetPhraseCollectionLEGACY(const Phrase& src) const;

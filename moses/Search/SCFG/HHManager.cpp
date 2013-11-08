@@ -53,7 +53,6 @@ void HHManager::CreateInputPaths()
       m_inputPathQueue.push_back(path);
     }
   }
-
 }
 
 HHInputPathSCFG &HHManager::GetInputPath(size_t startPos, size_t endPos)
@@ -65,6 +64,8 @@ HHInputPathSCFG &HHManager::GetInputPath(size_t startPos, size_t endPos)
 
 void HHManager::InitializeLookupManagers()
 {
+  size_t size = m_source.GetSize();
+
   const StaticData &staticData = StaticData::Instance();
   const std::vector<PhraseDictionary*> &dictionaries = staticData.GetPhraseDictionaries();
   m_ruleLookupManagers.reserve(dictionaries.size());
@@ -75,7 +76,7 @@ void HHManager::InitializeLookupManagers()
     const PhraseDictionary *dict = *p;
     PhraseDictionary *nonConstDict = const_cast<PhraseDictionary*>(dict);
 
-    HHLookupManager *lookupMgr = nonConstDict->HHCreateLookupManager();
+    HHLookupManager *lookupMgr = nonConstDict->HHCreateLookupManager(size);
     m_ruleLookupManagers.push_back(lookupMgr);
   }
 
@@ -83,6 +84,8 @@ void HHManager::InitializeLookupManagers()
 
 void HHManager::Process()
 {
+  // for each input path, use it to extend parse, and decode.
+  // --> input path list must be in topological order
   InputPathListSCFG::iterator iterPath;
   for (iterPath = m_inputPathQueue.begin(); iterPath != m_inputPathQueue.end(); ++iterPath) {
     HHInputPathSCFG &path = **iterPath;

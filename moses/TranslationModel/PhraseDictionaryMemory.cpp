@@ -127,9 +127,9 @@ ChartRuleLookupManager *PhraseDictionaryMemory::CreateRuleLookupManager(
   return new ChartRuleLookupManagerMemory(parser, cellCollection, *this);
 }
 
-HHLookupManager *PhraseDictionaryMemory::HHCreateLookupManager()
+HHLookupManager *PhraseDictionaryMemory::HHCreateLookupManager(size_t size)
 {
-  return new HHLookupManager();
+  return new HHLookupManagerMemory(*this, size);
 }
 
 void PhraseDictionaryMemory::SortAndPrune()

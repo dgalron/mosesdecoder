@@ -95,7 +95,7 @@ public:
     const ChartParser &,
     const ChartCellCollectionBase &) = 0;
 
-  virtual HHLookupManager *HHCreateLookupManager()
+  virtual HHLookupManager *HHCreateLookupManager(size_t size)
   { return NULL; // error
   }
 
