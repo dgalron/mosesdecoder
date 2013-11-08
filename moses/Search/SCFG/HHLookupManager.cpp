@@ -48,25 +48,9 @@ void HHLookupManagerMemory::Lookup(HHInputPathSCFG &path, const HHChartCells &ce
   }
 
   // 1 non-term that spans the entire path
-  const std::vector<Word> &sourceNonTerms = path.GetNonTerms();
-  const std::vector<Word> &targetNonTerms = cells.GetCell(range).GetNonTerms();
+  const PhraseDictionaryNodeMemory &prevNode = m_pt.GetRootNode();
+  LookupNonTermForWholePath(prevNode, path, cells);
 
-  for (size_t i = 0; i < sourceNonTerms.size(); ++i) {
-    const Word &sourceNonTerm = sourceNonTerms[i];
-    for (size_t j = 0; j < sourceNonTerms.size(); ++j) {
-      const Word &targetNonTerm = targetNonTerms[i];
-
-      const PhraseDictionaryNodeMemory &prevNode = m_pt.GetRootNode();
-      const PhraseDictionaryNodeMemory *nextNode = prevNode.GetChild(sourceNonTerm, targetNonTerm);
-      if (nextNode) {
-        // save it somewhere
-
-        // save in active stack
-        HHActiveChartItemMemory *item = new HHActiveChartItemMemory(&path, *nextNode);
-        endActiveList.push_back(item);
-      }
-    }
-  }
 
   // non-term that DOESN'T spans the entire path
   LookupNonTerm(path);
@@ -74,8 +58,44 @@ void HHLookupManagerMemory::Lookup(HHInputPathSCFG &path, const HHChartCells &ce
 
 void HHLookupManagerMemory::LookupNonTerm(HHInputPathSCFG &path)
 {
+  const std::vector<HHInputPathSCFG::BiPath> &suffixes = path.GetSuffixes();
+  for (size_t i = 0; i < suffixes.size(); ++i) {
+    const HHInputPathSCFG &prefix = *suffixes[i].first;
+    const HHInputPathSCFG &suffix = *suffixes[i].second;
+
+
+  }
 
 }
 
+void HHLookupManagerMemory::LookupNonTermForWholePath(const PhraseDictionaryNodeMemory &prevNode,
+                                                  HHInputPathSCFG &path,
+                                                  const HHChartCells &cells)
+{
+  const WordsRange &range = path.GetWordsRange();
+  size_t endPos = range.GetEndPos();
+
+  const std::vector<Word> &sourceNonTerms = path.GetNonTerms();
+  const std::vector<Word> &targetNonTerms = cells.GetCell(range).GetNonTerms();
+
+  ActiveChartList &endActiveList = m_activeItems[endPos];
+
+  for (size_t i = 0; i < sourceNonTerms.size(); ++i) {
+    const Word &sourceNonTerm = sourceNonTerms[i];
+    for (size_t j = 0; j < sourceNonTerms.size(); ++j) {
+      const Word &targetNonTerm = targetNonTerms[i];
+
+      const PhraseDictionaryNodeMemory *nextNode = prevNode.GetChild(sourceNonTerm, targetNonTerm);
+      if (nextNode) {
+        // save it somewhere - maybe not for unary non-term
+
+        // save in active stack
+        HHActiveChartItemMemory *item = new HHActiveChartItemMemory(&path, *nextNode);
+        endActiveList.push_back(item);
+      }
+    }
+  }
 }
+
+} // namespace
 

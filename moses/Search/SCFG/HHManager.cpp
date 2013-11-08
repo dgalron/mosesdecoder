@@ -47,6 +47,14 @@ void HHManager::CreateInputPaths()
       } else {
         const HHInputPathSCFG &prevPath = GetInputPath(startPos, endPos - 1);
         path = new HHInputPathSCFG(subphrase, labels, range, &prevPath, NULL);
+
+        // add suffixes
+        for (size_t startSuffix = startPos + 1; startSuffix < size; ++startSuffix) {
+          HHInputPathSCFG &prefix = GetInputPath(startPos, startSuffix);
+          HHInputPathSCFG &suffix = GetInputPath(startSuffix, endPos);
+          path->AddSuffix(prefix, suffix);
+        }
+
         vec.push_back(path);
       }
 

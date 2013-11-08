@@ -25,6 +25,7 @@ protected:
 	  InputPathListSCFG m_inputPathQueue;
 	  std::vector<HHLookupManager*> m_ruleLookupManagers;
 
+	  // THIS should be a local variable. This will be different for lattices
 	  typedef std::vector< std::vector<HHInputPathSCFG*> > InputPathMatrix;
 	  InputPathMatrix m_inputPathMatrix; /*< contains translation options */
 

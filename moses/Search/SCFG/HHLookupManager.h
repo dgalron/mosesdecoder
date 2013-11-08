@@ -47,7 +47,9 @@ protected:
   ActiveChart m_activeItems;
 
   void LookupNonTerm(HHInputPathSCFG &path);
-
+  void LookupNonTermForWholePath(const PhraseDictionaryNodeMemory &prevNode,
+                                HHInputPathSCFG &path,
+                                const HHChartCells &cells);
 
 };
 
