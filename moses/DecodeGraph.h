@@ -40,11 +40,14 @@ protected:
   std::list<const DecodeStep*> m_steps;
   size_t m_position;
   size_t m_maxChartSpan;
+  size_t m_backoff;
 
 public:
-  DecodeGraph(size_t position, size_t maxChartSpan)
+  DecodeGraph(size_t position)
     : m_position(position)
-    , m_maxChartSpan(maxChartSpan) {
+    , m_maxChartSpan(DEFAULT_MAX_CHART_SPAN)
+    , m_backoff(0)
+  {
   }
 
   //! iterators
@@ -68,9 +71,18 @@ public:
     return m_steps.size();
   }
 
+  size_t GetBackoff() const {
+    return m_steps.size();
+  }
+  void SetBackoff(size_t backoff){
+    m_backoff = backoff;
+  }
+
   size_t GetMaxChartSpan() const {
-    CHECK(m_maxChartSpan != NOT_FOUND);
     return m_maxChartSpan;
+  }
+  void SetMaxChartSpan(size_t maxSpan) {
+    m_maxChartSpan = maxSpan;
   }
 
   size_t GetPosition() const {

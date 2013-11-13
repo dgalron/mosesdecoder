@@ -649,7 +649,6 @@ void StaticData::LoadChartDecodingParameters()
 bool StaticData::LoadDecodeGraphs()
 {
   const vector<string> &mappingVector = m_parameter->GetParam("mapping");
-  const vector<size_t> &maxChartSpans = Scan<size_t>(m_parameter->GetParam("max-chart-span"));
 
   const std::vector<FeatureFunction*> *featuresRemaining = &FeatureFunction::GetFeatureFunctions();
   DecodeStep *prev = 0;
@@ -716,9 +715,7 @@ bool StaticData::LoadDecodeGraphs()
     CHECK(decodeStep);
     if (m_decodeGraphs.size() < decodeGraphInd + 1) {
       DecodeGraph *decodeGraph;
-	  size_t maxChartSpan = (decodeGraphInd < maxChartSpans.size()) ? maxChartSpans[decodeGraphInd] : DEFAULT_MAX_CHART_SPAN;
-	  cerr << "max-chart-span: " << maxChartSpans[decodeGraphInd] << endl;
-	  decodeGraph = new DecodeGraph(m_decodeGraphs.size(), maxChartSpan);
+	  decodeGraph = new DecodeGraph(m_decodeGraphs.size());
 
       m_decodeGraphs.push_back(decodeGraph); // TODO max chart span
     }
@@ -735,15 +732,20 @@ bool StaticData::LoadDecodeGraphs()
     }
   }
 
-  // set maximum n-gram size for backoff approach to decoding paths
-  // default is always use subsequent paths (value = 0)
-  for(size_t i=0; i<m_decodeGraphs.size(); i++) {
-    m_decodeGraphBackoff.push_back( 0 );
+  // max-span
+  const vector<size_t> &maxChartSpans = Scan<size_t>(m_parameter->GetParam("max-chart-span"));
+  CHECK(maxChartSpans.size() <= m_decodeGraphs.size());
+
+  for(size_t i=0; i < maxChartSpans.size(); i++) {
+    m_decodeGraphs[i]->SetMaxChartSpan(maxChartSpans[i]);
   }
-  // if specified, record maxmimum unseen n-gram size
-  const vector<string> &backoffVector = m_parameter->GetParam("decoding-graph-backoff");
-  for(size_t i=0; i<m_decodeGraphs.size() && i<backoffVector.size(); i++) {
-    m_decodeGraphBackoff[i] = Scan<size_t>(backoffVector[i]);
+
+  // backoffs
+  const vector<size_t> &backoffVector = Scan<size_t>(m_parameter->GetParam("decoding-graph-backoff"));
+  CHECK(backoffVector.size() <= m_decodeGraphs.size());
+
+  for(size_t i=0; i < backoffVector.size(); i++) {
+    m_decodeGraphs[i]->SetBackoff(backoffVector[i]);
   }
 
   return true;
