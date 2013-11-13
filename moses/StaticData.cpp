@@ -716,20 +716,23 @@ bool StaticData::LoadDecodeGraphs()
     CHECK(decodeStep);
     if (m_decodeGraphs.size() < decodeGraphInd + 1) {
       DecodeGraph *decodeGraph;
-      if (IsChart()) {
-        size_t maxChartSpan = (decodeGraphInd < maxChartSpans.size()) ? maxChartSpans[decodeGraphInd] : DEFAULT_MAX_CHART_SPAN;
-        cerr << "max-chart-span: " << maxChartSpans[decodeGraphInd] << endl;
-        decodeGraph = new DecodeGraph(m_decodeGraphs.size(), maxChartSpan);
-      } else {
-        decodeGraph = new DecodeGraph(m_decodeGraphs.size());
-      }
+	  size_t maxChartSpan = (decodeGraphInd < maxChartSpans.size()) ? maxChartSpans[decodeGraphInd] : DEFAULT_MAX_CHART_SPAN;
+	  cerr << "max-chart-span: " << maxChartSpans[decodeGraphInd] << endl;
+	  decodeGraph = new DecodeGraph(m_decodeGraphs.size(), maxChartSpan);
 
       m_decodeGraphs.push_back(decodeGraph); // TODO max chart span
     }
 
-    m_decodeGraphs[decodeGraphInd]->Add(decodeStep);
+    DecodeGraph &graph = *m_decodeGraphs[decodeGraphInd];
+    graph.Add(decodeStep);
     prev = decodeStep;
     prevDecodeGraphInd = decodeGraphInd;
+
+    // connect phrase-table to graph. Required to get max span
+    if (decodeType == Translate) {
+    	PhraseDictionary &pt = *m_phraseDictionary[index];
+    	pt.SetDecodeGraph(graph);
+    }
   }
 
   // set maximum n-gram size for backoff approach to decoding paths

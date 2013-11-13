@@ -52,6 +52,7 @@ class WordsRange;
 class ChartCellCollectionBase;
 class ChartRuleLookupManager;
 class ChartParser;
+class DecodeGraph;
 
 /**
   * Abstract base class for phrase dictionaries (tables).
@@ -104,6 +105,10 @@ public:
 
   void SetParameter(const std::string& key, const std::string& value);
 
+  const DecodeGraph &GetDecodeGraph() const
+  { return *m_decodeGraph; }
+  void SetDecodeGraph(const DecodeGraph &graph)
+  { m_decodeGraph = &graph;  }
 
   // LEGACY
   //! find list of translations that can translates a portion of src. Used by confusion network decoding
@@ -112,6 +117,7 @@ public:
 protected:
   size_t m_tableLimit;
   std::string m_filePath;
+  const DecodeGraph *m_decodeGraph;
 
   // features to apply evaluate target phrase when loading.
   // NOT when creating translation options. Those are in DecodeStep

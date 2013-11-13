@@ -37,6 +37,9 @@ PhraseDictionary::PhraseDictionary(const std::string &line)
   ,m_tableLimit(20) // default
   ,m_maxCacheSize(DEFAULT_MAX_TRANS_OPT_CACHE_SIZE)
 {
+	// default factors
+	m_input.push_back(0);
+	m_output.push_back(0);
 }
 
 const TargetPhraseCollection *PhraseDictionary::GetTargetPhraseCollectionLEGACY(const Phrase& src) const

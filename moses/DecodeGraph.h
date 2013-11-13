@@ -42,15 +42,6 @@ protected:
   size_t m_maxChartSpan;
 
 public:
-  /**
-    * position: The position of this graph within the decode sequence.
-    **/
-  DecodeGraph(size_t position)
-    : m_position(position)
-    , m_maxChartSpan(NOT_FOUND) {
-  }
-
-  // for chart decoding
   DecodeGraph(size_t position, size_t maxChartSpan)
     : m_position(position)
     , m_maxChartSpan(maxChartSpan) {
