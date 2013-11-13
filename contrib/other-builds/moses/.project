@@ -1672,6 +1672,16 @@
 			<locationURI>PARENT-3-PROJECT_LOC/moses/TranslationModel/SkeletonPT.h</locationURI>
 		</link>
 		<link>
+			<name>TranslationModel/UnknownPt.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/moses/TranslationModel/UnknownPt.cpp</locationURI>
+		</link>
+		<link>
+			<name>TranslationModel/UnknownPt.h</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/moses/TranslationModel/UnknownPt.h</locationURI>
+		</link>
+		<link>
 			<name>TranslationModel/WordCoocTable.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-3-PROJECT_LOC/moses/TranslationModel/WordCoocTable.cpp</locationURI>
