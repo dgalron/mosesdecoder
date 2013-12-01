@@ -138,7 +138,7 @@ int main(int argc, char* argv[])
          << " | --MaxNonTerm[" << options.maxNonTerm << "]"
          << " | --MaxScope[" << options.maxScope << "]"
          << " | --SourceSyntax | --TargetSyntax"
-         << " | --AllowOnlyUnalignedWords | --DisallowNonTermConsecTarget |--NonTermConsecSource |  --NoNonTermFirstWord | --NoFractionalCounting"
+         << " | --AllowOnlyUnalignedWords | --DisallowNonTermConsecTarget |--NonTermConsecSource |  --NoNonTermFirstWord | --NoFractionalCounting | --DisallowDiscontinuousConstituents "
          << " | --UnpairedExtractFormat"
          << " | --ConditionOnTargetLHS ]"
          << " | --BoundaryRules[" << options.boundaryRules << "]"
@@ -235,6 +235,8 @@ int main(int argc, char* argv[])
       options.onlyOutputSpanInfo = true;
     } else if (strcmp(argv[i],"--OnlyDirect") == 0) {
       options.onlyDirectFlag = true;
+    } else if (strcmp(argv[i],"--DisallowDiscontinuousConstituents") == 0) {
+      options.onlyContinuousConstituents = true;
     } else if (strcmp(argv[i],"--GlueGrammar") == 0) {
       options.glueGrammarFlag = true;
       if (++i >= argc) {
@@ -827,6 +829,10 @@ void ExtractTask::addHieroRule( int startT, int endT, int startS, int endS
 
       // always enforce min word count limit
       if (newWordCountT < m_options.minWords)
+        continue;
+        
+      // If we are enforcing continuous constituents (i.e. no holes in the surrounded by phrases), continue
+      if (m_options.onlyContinuousConstituents && startHoleT != startT && endHoleT != endT)
         continue;
 
       // except the whole span
