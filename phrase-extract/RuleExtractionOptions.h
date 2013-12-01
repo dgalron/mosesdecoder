@@ -54,6 +54,7 @@ public:
   bool conditionOnTargetLhs;
   bool boundaryRules;
   bool flexScoreFlag;
+  bool onlyContinuousConstituents;
 
   RuleExtractionOptions()
     : maxSpan(10)
@@ -86,7 +87,8 @@ public:
     , unpairedExtractFormat(false)
     , conditionOnTargetLhs(false)
     , boundaryRules(false)
-    , flexScoreFlag(false) {}
+    , flexScoreFlag(false)
+    , onlyContinuousConstituents(false) {}
 };
 
 }

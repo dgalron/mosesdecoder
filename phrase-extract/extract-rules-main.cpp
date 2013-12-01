@@ -870,6 +870,9 @@ void ExtractTask::addHieroRule( int startT, int endT, int startS, int endS
         // (may be violated if subphrase contains additional unaligned source word)
         if (startS > sourceHole.GetStart(0) || endS <  sourceHole.GetEnd(0))
           continue;
+          
+        if (m_options.onlyContinuousConstituents && startS != sourceHole.GetStart(0) && endS != sourceHole.GetEnd(0))
+          continue;
 
         // make sure target side does not overlap with another hole
         if (holeColl.OverlapSource(sourceHole))
